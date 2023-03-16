@@ -1,122 +1,53 @@
 package com.app.travel.models;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
 class AccommodationData {
+    @Getter
+    @Setter
     private Integer numberOfBeds;
+    @Getter
+    @Setter
     private Boolean petFriendly;
+    @Getter
+    @Setter
     private Integer accommodationRating;
+    @Getter
+    @Setter
     private Integer capacity;
-
-    public AccommodationData(Integer numberOfBeds, Boolean petFriendly, Integer accommodationRating, Integer capacity) {
-        this.numberOfBeds = numberOfBeds;
-        this.petFriendly = petFriendly;
-        this.accommodationRating = accommodationRating;
-        this.capacity = capacity;
-    }
-
-    public AccommodationData() {
-    }
-
-    public Integer getNumberOfBeds() {
-        return numberOfBeds;
-    }
-
-    public void setNumberOfBeds(Integer numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
-    }
-
-    public Boolean getPetFriendly() {
-        return petFriendly;
-    }
-
-    public void setPetFriendly(Boolean petFriendly) {
-        this.petFriendly = petFriendly;
-    }
-
-    public Integer getAccommodationRating() {
-        return accommodationRating;
-    }
-
-    public void setAccommodationRating(Integer accommodationRating) {
-        this.accommodationRating = accommodationRating;
-    }
-
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
 }
 
+@AllArgsConstructor
+@NoArgsConstructor
 class TransportationData{
+    @Getter
+    @Setter
     private String vehicleType;
+    @Getter
+    @Setter
     private Integer capacity;
-
-    public TransportationData(String vehicleType, Integer capacity) {
-        this.vehicleType = vehicleType;
-        this.capacity = capacity;
-    }
-
-    public TransportationData() {
-    }
-
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
 }
 
+@AllArgsConstructor
+@NoArgsConstructor
 class MealData{
+    @Getter
+    @Setter
     private String mealType;
+    @Getter
+    @Setter
     private Boolean isVegetarian;
+    @Getter
+    @Setter
     private Boolean isHalal;
-
-    public MealData(String mealType, Boolean isVegetarian, Boolean isHalal) {
-        this.mealType = mealType;
-        this.isVegetarian = isVegetarian;
-        this.isHalal = isHalal;
-    }
-
-    public MealData() {
-    }
-
-    public String getMealType() {
-        return mealType;
-    }
-
-    public void setMealType(String mealType) {
-        this.mealType = mealType;
-    }
-
-    public Boolean getVegetarian() {
-        return isVegetarian;
-    }
-
-    public void setVegetarian(Boolean vegetarian) {
-        isVegetarian = vegetarian;
-    }
-
-    public Boolean getHalal() {
-        return isHalal;
-    }
-
-    public void setHalal(Boolean halal) {
-        isHalal = halal;
-    }
 }
 
+@AllArgsConstructor
+@NoArgsConstructor
 class ExcursionData{
+    @Getter
+    @Setter
     private String tourGuideName;
 }
