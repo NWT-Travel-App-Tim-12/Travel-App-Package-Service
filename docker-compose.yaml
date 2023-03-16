@@ -1,14 +1,14 @@
 version: '3.8'
 services:
 
-  postgresql:
+  package-service:
     image: postgres:10
     ports:
-      - $POSTGRES_PORT:$POSTGRES_PORT
+      - $POSTGRES_PACKAGE_PORT:$POSTGRES_PACKAGE_PORT
     environment:
-      POSTGRES_USER: $POSTGRES_USER
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_PACKAGE_USER
+      POSTGRES_PASSWORD: $POSTGRES_PACKAGE_PASSWORD
+      POSTGRES_DB: $POSTGRES_PACKAGE_DB
       PGUSER: postgres
     restart: unless-stopped
     healthcheck:
@@ -17,8 +17,65 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-      - db:/var/lib/postgresql
+      - packagedb:/var/lib/postgresql
+
+#  booking-service:
+#    image: postgres:10
+#    ports:
+#      - $POSTGRES_BOOKING_PORT:$POSTGRES_BOOKING_PORT
+#    environment:
+#      POSTGRES_USER: $POSTGRES_BOOKING_USER
+#      POSTGRES_PASSWORD: $POSTGRES_BOOKING_PASSWORD
+#      POSTGRES_DB: $POSTGRES_BOOKING_DB
+#      PGUSER: postgres
+#    restart: unless-stopped
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#    volumes:
+#      - bookingdb:/var/lib/postgresql
+#
+#  payment-service:
+#    image: postgres:10
+#    ports:
+#      - $POSTGRES_PAYMENT_PORT:$POSTGRES_PAYMENT_PORT
+#    environment:
+#      POSTGRES_USER: $POSTGRES_PAYMENT_USER
+#      POSTGRES_PASSWORD: $POSTGRES_PAYMENT_PASSWORD
+#      POSTGRES_DB: $POSTGRES_PAYMENT_DB
+#      PGUSER: postgres
+#    restart: unless-stopped
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#    volumes:
+#      - paymentdb:/var/lib/postgresql
+#
+#  user-service:
+#    image: postgres:10
+#    ports:
+#      - $POSTGRES_USER_PORT:$POSTGRES_USER_PORT
+#    environment:
+#      POSTGRES_USER: $POSTGRES_USER_USER
+#      POSTGRES_PASSWORD: $POSTGRES_USER_PASSWORD
+#      POSTGRES_DB: $POSTGRES_USER_DB
+#      PGUSER: postgres
+#    restart: unless-stopped
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#    volumes:
+#      - userdb:/var/lib/postgresql
 
 
 volumes:
-  db:
+  packagedb:
+#  bookingdb:
+#  paymentdb:
+#  userdb:

@@ -1,37 +1,20 @@
 package com.app.travel.models;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "currencies")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")
+    @Getter
+    @Setter
     private Integer id;
+    @Getter
+    @Setter
     private String name;
-
-    public Currency(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Currency() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
