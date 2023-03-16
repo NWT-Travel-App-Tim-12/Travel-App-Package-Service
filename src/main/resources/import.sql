@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 insert into currencies (name) values ('BAM'), ('USD'), ('EUR'), ('GBP');
 
 insert into service_types (name) values ('ACCOMMODATION'), ('MEAL'), ('TRANSPORT'), ('EXCURSION');
