@@ -1,16 +1,21 @@
 package com.app.travel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 @Entity
 @Table(name = "packages")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Package {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +23,7 @@ public class Package {
     @Getter
     @Setter
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Getter
     @Setter
     private Region regionRef;
@@ -51,5 +56,6 @@ public class Package {
     @ManyToMany(mappedBy = "packages", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @Getter
     @Setter
-    private Set<Service> services = new HashSet<>();
+    @JsonIgnore
+    private List<Service> services;
 }

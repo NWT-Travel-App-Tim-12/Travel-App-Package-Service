@@ -10,4 +10,4 @@ insert into packages (agency, agent_ref, created_at, description, "name", packag
 
 insert into services (agent_ref, "cost", created_at, description, "name", service_code, region_ref_id, service_type_ref_id, additional_data) values (1, 255, NOW(), 'visit to lovre', 'lovre visit', 'LV_visit', 3, 4, '{"tour_guide_name": "meho"}'), (2, 555, NOW(), 'room in grand hotel', 'hotel', 'H_123', 1, 1, '{"number_of_beds": 2, "pet_friendly": false, "accommodation_raiting": 5, "capacity": 2}'), (3, 11, NOW(), 'voznja tramvajom', 'voznja', 'T_1', 1, 3, '{"vehicle_type": "tram", "capacity": 50}'), (4, 100, NOW(), 'vecera kod brajlovica', 'janjetina', 'M_1', 1, 2, '{"meal_type": "dinner", "is_vegetarian": false, "is_halal": true}');
 
-insert into package_services (package_id, service_id) values (1,1), (1,2), (1,3), (1,4), (2,1), (2,2), (2,3), (2,4);
+insert into package_services (package_id, service_id) values (1,2), (1,3), (1,4), (2,1), (2,2), (2,3), (2,4);

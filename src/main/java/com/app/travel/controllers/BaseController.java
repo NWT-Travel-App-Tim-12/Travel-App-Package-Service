@@ -14,8 +14,7 @@ public class BaseController <ModelType, ModelIdType,  ModelService extends BaseC
 
     @GetMapping
     public ModelType get(ModelIdType id) throws Exception {
-        var nesto = service.get(id);
-        return nesto;
+        return service.get(id);
     }
 
     @GetMapping(path = "/list")
