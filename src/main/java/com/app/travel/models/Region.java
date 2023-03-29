@@ -3,6 +3,7 @@ package com.app.travel.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,11 +21,11 @@ public class Region {
     @Getter
     @Setter
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @Getter
     @Setter
     private Currency currencyRef;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(columnDefinition="integer", name = "super_region_id")
     @Getter
     @Setter
@@ -32,6 +33,7 @@ public class Region {
     private Region superRegion;
     @Getter
     @Setter
+    @NotEmpty(message = "The region must have a defined name!")
     private String name;
     @Getter
     @Setter

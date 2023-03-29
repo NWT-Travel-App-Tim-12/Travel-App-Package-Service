@@ -1,9 +1,11 @@
 package com.app.travel.controllers;
 
 import com.app.travel.models.Package;
-import com.app.travel.models.Service;
+import com.app.travel.models.additinaldata.AdditionalData;
+import com.app.travel.models.dto.ServiceReturnDTO;
 import com.app.travel.service.PackageService;
 import com.app.travel.service.ServiceService;
+import com.app.travel.util.GenericCaster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +28,22 @@ public class PackageServiceController {
     }
 
     @GetMapping("/package-services")
-    public List<Service> getPackageServices(Integer id) throws Exception {
-        return packageService.get(id).getServices();
+    public List<ServiceReturnDTO> getPackageServices(Integer id) throws Exception {
+        return packageService.get(id).getServices().stream().map(service -> {
+            AdditionalData additionalData = GenericCaster.castToAppropriateType(service.getAdditionalData());
+            return new ServiceReturnDTO(
+                    service.getId(),
+                    service.getServiceTypeRef(),
+                    service.getRegionRef(),
+                    service.getAgentRef(),
+                    service.getServiceCode(),
+                    service.getName(),
+                    service.getDescription(),
+                    service.getCreatedAt(),
+                    service.getCost(),
+                    additionalData
+            );
+        }).toList();
     }
 
     @GetMapping("/service-packages")

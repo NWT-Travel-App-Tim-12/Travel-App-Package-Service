@@ -2,6 +2,7 @@ package com.app.travel.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,6 @@ public class ServiceType {
     private Integer id;
     @Getter
     @Setter
+    @NotEmpty(message = "A service type must have a defined name!")
     private String name;
 }

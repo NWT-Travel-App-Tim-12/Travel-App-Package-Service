@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,11 +24,11 @@ public class Service {
     @Getter
     @Setter
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @Getter
     @Setter
     private ServiceType serviceTypeRef;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @Getter
     @Setter
     private Region regionRef;
@@ -45,11 +46,13 @@ public class Service {
     private String description;
     @Getter
     @Setter
+    @Column(updatable = false)
+    @CreationTimestamp
     private LocalDate createdAt;
     @Getter
     @Setter
     private Double cost;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "package_services",
             joinColumns = {@JoinColumn(name = "service_id")},
@@ -59,8 +62,8 @@ public class Service {
     @Setter
     @JsonIgnore
     private List<Package> packages;
-    @Column(columnDefinition = "jsonb")
+    @Column(columnDefinition="TEXT")
     @Getter
     @Setter
-    private Object additionalData;
+    private String additionalData;
 }

@@ -1,11 +1,12 @@
 package com.app.travel.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-public class BaseCrudService<ModelType, ModelIdType > {
+public abstract class BaseCrudService<ModelType, ModelIdType > {
     protected final JpaRepository<ModelType, ModelIdType> repository;
 
 
@@ -19,8 +20,10 @@ public class BaseCrudService<ModelType, ModelIdType > {
         throw new Exception("Object with id " + id + " does not exist.");
     }
 
-    public List<ModelType> getAll(){
-        return repository.findAll();
+    public List<ModelType> getAll(int page, int pageSize){
+        return repository.findAll(
+                PageRequest.of(page, pageSize)
+        ).stream().toList();
     }
 
     public ModelType insert(ModelType model){
