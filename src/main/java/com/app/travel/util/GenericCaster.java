@@ -1,6 +1,7 @@
 package com.app.travel.util;
 
 import com.app.travel.models.additinaldata.*;
+import com.app.travel.util.exceptions.InvalidAdditionalDataCast;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
@@ -44,17 +45,17 @@ public class GenericCaster {
         return gson.fromJson(json, objectClass);
     }
 
-    public static AdditionalData castToAppropriateType(Map<String, String> kvp)  {
+    public static AdditionalData castToAppropriateType(Map<String, String> kvp) {
         var list = List.of((Function<Map<String, String>, AdditionalData>) AccommodationData::CastFromMap, MealData::CastFromMap, TransportationData::CastFromMap, ExcursionData::CastFromMap);
 
         for (var caster : list) {
             var obj = caster.apply(kvp);
             if (obj != null) return obj;
         }
-        return null;
+        throw new InvalidAdditionalDataCast("Additional data field is not in a valid format");
     }
 
-    public static AdditionalData castToAppropriateType(String json) {
+    public static AdditionalData castToAppropriateType(String json){
         var list = List.of((Function<String, AdditionalData>) AccommodationData::CastFromString, MealData::CastFromString, TransportationData::CastFromString, ExcursionData::CastFromString);
 
         for (var caster : list) {
@@ -75,6 +76,6 @@ public class GenericCaster {
             }
             if (!invalidCast) return obj;
         }
-        return null;
+        throw new InvalidAdditionalDataCast("Additional data field is not in a valid format");
     }
 }

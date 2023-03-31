@@ -1,5 +1,7 @@
 package com.app.travel.models;
 
+import com.app.travel.util.annotations.IgnoreOnObjectUpdate;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -60,7 +62,8 @@ public class Service {
     )
     @Getter
     @Setter
-    @JsonIgnore
+    @JsonBackReference
+    @IgnoreOnObjectUpdate
     private List<Package> packages;
     @Column(columnDefinition="TEXT")
     @Getter

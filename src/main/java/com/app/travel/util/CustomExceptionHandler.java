@@ -1,5 +1,8 @@
 package com.app.travel.util;
 
+import com.app.travel.util.exceptions.InvalidAdditionalDataCast;
+import com.app.travel.util.exceptions.MissingParameterInRequest;
+import com.app.travel.util.exceptions.ObjectDoesNotExistInDb;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,12 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -32,5 +36,20 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                         .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage))
         );
         return new ResponseEntity<>(responseBody, headers, status);
+    }
+
+    @ExceptionHandler({
+            MissingParameterInRequest.class,
+            ObjectDoesNotExistInDb.class,
+            InvalidAdditionalDataCast.class
+    })
+    public ResponseEntity<Object> customErrors(RuntimeException exception){
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("timestamp", new Date());
+        responseBody.put("status", HttpStatus.BAD_REQUEST.value());
+        var list = new ArrayList<String>();
+        list.add(exception.getMessage());
+        responseBody.put("errors", list);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
     }
 }

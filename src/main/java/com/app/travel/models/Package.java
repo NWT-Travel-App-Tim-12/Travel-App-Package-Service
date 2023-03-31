@@ -1,10 +1,11 @@
 package com.app.travel.models;
 
+import com.app.travel.util.annotations.IgnoreOnObjectUpdate;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -67,6 +68,7 @@ public class Package {
     @ManyToMany(mappedBy = "packages", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @Getter
     @Setter
-    @JsonIgnore
+    @JsonBackReference
+    @IgnoreOnObjectUpdate
     private List<Service> services;
 }

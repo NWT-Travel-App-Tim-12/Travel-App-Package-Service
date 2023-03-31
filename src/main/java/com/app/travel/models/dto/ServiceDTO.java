@@ -3,6 +3,7 @@ package com.app.travel.models.dto;
 import com.app.travel.models.Package;
 import com.app.travel.models.Region;
 import com.app.travel.models.ServiceType;
+import com.app.travel.util.annotations.IgnoreOnObjectUpdate;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -47,6 +48,7 @@ public class ServiceDTO {
     private Double cost;
     @Getter
     @Setter
+    @IgnoreOnObjectUpdate
     private List<Package> packages;
     @Getter
     @Setter
