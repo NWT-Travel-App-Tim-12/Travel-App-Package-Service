@@ -7,11 +7,14 @@ import com.app.travel.service.PackageService;
 import com.app.travel.service.ServiceService;
 import com.app.travel.util.GenericCaster;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -28,8 +31,8 @@ public class PackageServiceController {
     }
 
     @GetMapping("/package-services")
-    public List<ServiceReturnDTO> getPackageServices(Integer id) throws Exception {
-        return packageService.get(id).getServices().stream().map(service -> {
+    public ResponseEntity<List<ServiceReturnDTO>> getPackageServices(Integer id) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(packageService.get(id).getServices().stream().map(service -> {
             AdditionalData additionalData = GenericCaster.castToAppropriateType(service.getAdditionalData());
             return new ServiceReturnDTO(
                     service.getId(),
@@ -43,22 +46,27 @@ public class PackageServiceController {
                     service.getCost(),
                     additionalData
             );
-        }).toList();
+        }).toList());
     }
 
     @GetMapping("/service-packages")
-    public List<Package> getServicePackages(Integer id) throws Exception {
-        return serviceService.get(id).getPackages();
+    public ResponseEntity<List<Package>> getServicePackages(Integer id) throws Exception {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(serviceService.get(id).getPackages());
     }
 
     @PostMapping("/connect")
-    public int insertNewConnection(Integer packageId, Integer serviceId) throws Exception {
+    public ResponseEntity<HashMap<String, Integer>> insertNewConnection(Integer packageId, Integer serviceId) throws Exception {
         var packageO = packageService.get(packageId);
         var serviceO = serviceService.get(serviceId);
         packageO.getServices().add(serviceO);
         serviceO.getPackages().add(packageO);
         packageService.update(packageId, packageO);
         serviceService.update(serviceId, serviceO);
-        return 1;
+        var response = new HashMap<String, Integer>();
+        response.put("package_id", packageId);
+        response.put("service_id", serviceId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

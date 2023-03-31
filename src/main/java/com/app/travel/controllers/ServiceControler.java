@@ -6,6 +6,8 @@ import com.app.travel.models.dto.ServiceReturnDTO;
 import com.app.travel.service.ServiceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,27 +28,31 @@ public class ServiceControler extends BaseController<Service, Integer, ServiceSe
     }
 
     @GetMapping
-    public ServiceReturnDTO getDto(int id) throws Exception {
-        return service.getDto(id);
+    public ResponseEntity<ServiceReturnDTO> getDto(int id) throws Exception {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(service.getDto(id));
     }
 
     @GetMapping(path = "/list")
-    public List<ServiceReturnDTO> getAllDto(int page, int pageSize) throws Exception {
-        return service.getAllDto(page, pageSize);
+    public ResponseEntity<List<ServiceReturnDTO>> getAllDto(int page, int pageSize) throws Exception {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(service.getAllDto(page, pageSize));
     }
 
     @PutMapping
-    public Service put(Integer id, @RequestBody @Valid Service request) throws Exception {
+    public ResponseEntity<Service> put(Integer id, @RequestBody @Valid Service request) throws Exception {
         return super.put(id, request);
     }
 
     @PatchMapping
-    public Service patch(Integer id, @RequestBody @Valid Service request) throws Exception {
+    public ResponseEntity<Service> patch(Integer id, @RequestBody @Valid Service request) throws Exception {
         return super.patch(id, request);
     }
 
     @DeleteMapping
-    public int delete(Integer id){
+    public ResponseEntity<Integer> delete(Integer id){
         return super.delete(id);
     }
 
