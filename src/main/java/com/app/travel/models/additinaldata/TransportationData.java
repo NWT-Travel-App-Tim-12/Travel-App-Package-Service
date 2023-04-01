@@ -19,7 +19,7 @@ class TransportationData extends AdditionalData {
     @Setter
     private Integer capacity;
 
-    public static TransportationData CastFromMap(Map<String, String> kvp) {
+    public static TransportationData CastFromMap(Map<String, Object> kvp) {
         return GenericCaster.mapToType(kvp, TransportationData.class, new TransportationData());
     }
 

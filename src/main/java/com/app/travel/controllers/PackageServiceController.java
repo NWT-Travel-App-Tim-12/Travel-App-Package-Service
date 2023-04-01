@@ -32,12 +32,14 @@ public class PackageServiceController {
 
     @GetMapping("/package-services")
     public ResponseEntity<List<ServiceReturnDTO>> getPackageServices(Integer id) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(packageService.get(id).getServices().stream().map(service -> {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(packageService.get(id).getServices().stream().map(service -> {
             AdditionalData additionalData = GenericCaster.castToAppropriateType(service.getAdditionalData());
             return new ServiceReturnDTO(
                     service.getId(),
-                    service.getServiceTypeRef(),
-                    service.getRegionRef(),
+                    service.getServiceTypeId(),
+                    service.getRegionId(),
                     service.getAgentRef(),
                     service.getServiceCode(),
                     service.getName(),

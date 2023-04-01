@@ -22,7 +22,7 @@ class MealData extends AdditionalData {
     @Setter
     private Boolean is_halal;
 
-    public static MealData CastFromMap(Map<String, String> kvp) {
+    public static MealData CastFromMap(Map<String, Object> kvp) {
         return GenericCaster.mapToType(kvp, MealData.class, new MealData());
     }
 

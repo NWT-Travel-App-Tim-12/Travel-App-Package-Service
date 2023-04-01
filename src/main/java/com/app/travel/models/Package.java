@@ -1,7 +1,6 @@
 package com.app.travel.models;
 
 import com.app.travel.util.annotations.IgnoreOnObjectUpdate;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -23,16 +22,23 @@ import java.util.UUID;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Package {
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")
-    @Getter
-    @Setter
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @Getter
     @Setter
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "region_id", insertable = false, updatable = false)
+    @IgnoreOnObjectUpdate
+    @JsonIgnore
     private Region regionRef;
+    @Getter
+    @Setter
+    @Column(name = "region_id")
+    private Integer regionId;
     @Getter
     @Setter
     @NotNull(message = "The package must have a defined agent reference!")
@@ -41,9 +47,9 @@ public class Package {
     @Setter
     @NotNull(message = "The package must have a defined agency!")
     private UUID agency;
-    @Column(name = "package_code")
     @Getter
     @Setter
+    @Column(name = "package_code")
     private String packageCode;
     @Getter
     @Setter
@@ -64,11 +70,10 @@ public class Package {
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDate createdAt;
-
-    @ManyToMany(mappedBy = "packages", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @Getter
     @Setter
-    @JsonBackReference
+    @ManyToMany(mappedBy = "packages", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnore
     @IgnoreOnObjectUpdate
     private List<Service> services;
 }

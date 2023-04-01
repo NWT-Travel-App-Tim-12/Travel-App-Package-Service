@@ -4,7 +4,6 @@ import com.app.travel.models.Package;
 import com.app.travel.service.PackageService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ public class PackageController extends BaseController<Package, Integer, PackageS
         super(service);
     }
     @PostMapping
-    public ResponseEntity<Package> post(@RequestBody @Valid Package request) {
+    public ResponseEntity<Package> post(@RequestBody @Valid Package request) throws Exception {
         return super.post(request);
     }
 

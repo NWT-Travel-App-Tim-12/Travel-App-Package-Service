@@ -25,7 +25,7 @@ class AccommodationData extends AdditionalData {
     @Setter
     private Integer capacity;
 
-    public static AccommodationData CastFromMap(Map<String, String> kvp) {
+    public static AccommodationData CastFromMap(Map<String, Object> kvp) {
         return GenericCaster.mapToType(kvp, AccommodationData.class, new AccommodationData());
     }
 

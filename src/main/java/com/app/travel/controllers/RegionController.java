@@ -1,6 +1,5 @@
 package com.app.travel.controllers;
 
-import com.app.travel.models.Package;
 import com.app.travel.models.Region;
 import com.app.travel.service.RegionService;
 import jakarta.validation.Valid;
@@ -37,7 +36,7 @@ public class RegionController extends BaseController<Region, Integer, RegionServ
     }
 
     @PostMapping
-    public ResponseEntity<Region> post(@RequestBody @Valid Region request) {
+    public ResponseEntity<Region> post(@RequestBody @Valid Region request) throws Exception {
         return super.post(request);
     }
 

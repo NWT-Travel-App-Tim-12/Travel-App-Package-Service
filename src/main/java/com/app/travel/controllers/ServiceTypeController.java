@@ -29,7 +29,7 @@ public class ServiceTypeController extends BaseController<ServiceType, Integer, 
     }
 
     @PostMapping
-    public ResponseEntity<ServiceType> post(@RequestBody @Valid ServiceType request) {
+    public ResponseEntity<ServiceType> post(@RequestBody @Valid ServiceType request) throws Exception {
         return super.post(request);
     }
 

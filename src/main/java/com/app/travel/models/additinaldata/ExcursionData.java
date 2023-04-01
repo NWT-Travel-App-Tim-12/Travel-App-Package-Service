@@ -16,7 +16,7 @@ class ExcursionData extends AdditionalData {
     @Setter
     private String tour_guide_name;
 
-    public static ExcursionData CastFromMap(Map<String, String> kvp) {
+    public static ExcursionData CastFromMap(Map<String, Object> kvp) {
         return GenericCaster.mapToType(kvp, ExcursionData.class, new ExcursionData());
     }
 

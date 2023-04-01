@@ -2,7 +2,6 @@ package com.app.travel.controllers;
 
 import com.app.travel.models.Currency;
 import com.app.travel.service.CurrencyService;
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import java.util.List;
 @RequestMapping(path = "currency")
 public class CurrencyController extends BaseController<Currency, Integer, CurrencyService> {
     @Autowired
-    public CurrencyController(CurrencyService currencyService){
+    public CurrencyController(CurrencyService currencyService) {
         super(currencyService);
     }
 
@@ -29,7 +28,7 @@ public class CurrencyController extends BaseController<Currency, Integer, Curren
     }
 
     @PostMapping
-    public ResponseEntity<Currency> post(@RequestBody @Valid Currency request) {
+    public ResponseEntity<Currency> post(@RequestBody @Valid Currency request) throws Exception {
         return super.post(request);
     }
 
@@ -44,7 +43,7 @@ public class CurrencyController extends BaseController<Currency, Integer, Curren
     }
 
     @DeleteMapping
-    public ResponseEntity<Integer> delete(Integer id){
+    public ResponseEntity<Integer> delete(Integer id) {
         return super.delete(id);
     }
 

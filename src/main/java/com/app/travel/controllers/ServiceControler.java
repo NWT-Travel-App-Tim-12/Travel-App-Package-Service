@@ -1,7 +1,7 @@
 package com.app.travel.controllers;
 
 import com.app.travel.models.Service;
-import com.app.travel.models.dto.ServiceDTO;
+import com.app.travel.models.dto.ServiceInsertDTO;
 import com.app.travel.models.dto.ServiceReturnDTO;
 import com.app.travel.service.ServiceService;
 import jakarta.validation.Valid;
@@ -23,8 +23,10 @@ public class ServiceControler extends BaseController<Service, Integer, ServiceSe
     }
 
     @PostMapping
-    public ServiceDTO post(@RequestBody @Valid ServiceDTO request) {
-        return service.insert(request);
+    public ResponseEntity<Service> post(@RequestBody @Valid ServiceInsertDTO request) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(service.insert(request));
     }
 
     @GetMapping
@@ -35,20 +37,24 @@ public class ServiceControler extends BaseController<Service, Integer, ServiceSe
     }
 
     @GetMapping(path = "/list")
-    public ResponseEntity<List<ServiceReturnDTO>> getAllDto(int page, int pageSize) throws Exception {
+    public ResponseEntity<List<ServiceReturnDTO>> getAllDto(int page, int pageSize) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(service.getAllDto(page, pageSize));
     }
 
     @PutMapping
-    public ResponseEntity<Service> put(Integer id, @RequestBody @Valid Service request) throws Exception {
-        return super.put(id, request);
+    public ResponseEntity<ServiceReturnDTO> put(Integer id, @RequestBody @Valid ServiceInsertDTO request) throws Exception {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(service.update(id, request));
     }
 
     @PatchMapping
-    public ResponseEntity<Service> patch(Integer id, @RequestBody @Valid Service request) throws Exception {
-        return super.patch(id, request);
+    public ResponseEntity<ServiceReturnDTO> patch(Integer id, @RequestBody @Valid ServiceInsertDTO request) throws Exception {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(service.patch(id, request));
     }
 
     @DeleteMapping

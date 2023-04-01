@@ -1,17 +1,17 @@
 package com.app.travel.models.dto;
 
-import com.app.travel.models.additinaldata.AdditionalData;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceReturnDTO {
-
+public class ServiceInsertDTO {
     @Getter
     @Setter
     private Integer id;
@@ -23,12 +23,14 @@ public class ServiceReturnDTO {
     private Integer regionId;
     @Getter
     @Setter
+    //@NotNull(message = "The service must have a defined agent reference")
     private Integer agentRef;
     @Getter
     @Setter
     private String serviceCode;
     @Getter
     @Setter
+    //@NotEmpty(message = "The service must have a defined name")
     private String name;
     @Getter
     @Setter
@@ -38,8 +40,9 @@ public class ServiceReturnDTO {
     private LocalDate createdAt;
     @Getter
     @Setter
+    @PositiveOrZero(message = "The service cost cannot be negative")
     private Double cost;
     @Getter
     @Setter
-    private AdditionalData additionalData;
+    private Map<String, Object> additionalData;
 }

@@ -23,7 +23,7 @@ public class GenericCaster {
         }
         return snakeCaseBuilder.toString();
     }
-    public static <T> T mapToType(Map<String, String> kvp, Class<T> objectClass, T newObject) {
+    public static <T> T mapToType(Map<String, Object> kvp, Class<T> objectClass, T newObject) {
         try {
             for (Field field : objectClass.getDeclaredFields()) {
                 field.setAccessible(true);
@@ -45,8 +45,10 @@ public class GenericCaster {
         return gson.fromJson(json, objectClass);
     }
 
-    public static AdditionalData castToAppropriateType(Map<String, String> kvp) {
-        var list = List.of((Function<Map<String, String>, AdditionalData>) AccommodationData::CastFromMap, MealData::CastFromMap, TransportationData::CastFromMap, ExcursionData::CastFromMap);
+    public static AdditionalData castToAppropriateType(Map<String, Object> kvp) {
+        if(kvp == null) return null;
+
+        var list = List.of((Function<Map<String, Object>, AdditionalData>) AccommodationData::CastFromMap, MealData::CastFromMap, TransportationData::CastFromMap, ExcursionData::CastFromMap);
 
         for (var caster : list) {
             var obj = caster.apply(kvp);
@@ -56,6 +58,8 @@ public class GenericCaster {
     }
 
     public static AdditionalData castToAppropriateType(String json){
+        if(json == null || json.isBlank()) return null;
+
         var list = List.of((Function<String, AdditionalData>) AccommodationData::CastFromString, MealData::CastFromString, TransportationData::CastFromString, ExcursionData::CastFromString);
 
         for (var caster : list) {

@@ -20,20 +20,34 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Service {
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")
-    @Getter
-    @Setter
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @Getter
     @Setter
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "service_type_id", insertable = false, updatable = false)
+    @IgnoreOnObjectUpdate
+    @JsonIgnore
     private ServiceType serviceTypeRef;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @Getter
     @Setter
+    @Column(name = "service_type_id")
+    private Integer serviceTypeId;
+    @Getter
+    @Setter
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "region_id", insertable = false, updatable = false)
+    @IgnoreOnObjectUpdate
+    @JsonBackReference
     private Region regionRef;
+    @Getter
+    @Setter
+    @Column(name = "region_id")
+    private Integer regionId;
     @Getter
     @Setter
     private Integer agentRef;
@@ -54,19 +68,19 @@ public class Service {
     @Getter
     @Setter
     private Double cost;
+    @Getter
+    @Setter
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "package_services",
             joinColumns = {@JoinColumn(name = "service_id")},
             inverseJoinColumns = {@JoinColumn(name = "package_id")}
     )
-    @Getter
-    @Setter
-    @JsonBackReference
+    @JsonIgnore
     @IgnoreOnObjectUpdate
     private List<Package> packages;
-    @Column(columnDefinition="TEXT")
     @Getter
     @Setter
+    @Column(columnDefinition="TEXT")
     private String additionalData;
 }

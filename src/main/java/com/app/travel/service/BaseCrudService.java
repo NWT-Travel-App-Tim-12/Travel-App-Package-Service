@@ -3,18 +3,15 @@ package com.app.travel.service;
 import com.app.travel.util.annotations.IgnoreOnObjectUpdate;
 import com.app.travel.util.exceptions.MissingParameterInRequest;
 import com.app.travel.util.exceptions.ObjectDoesNotExistInDb;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
 public abstract class BaseCrudService<ModelType, ModelIdType> {
-    protected final JpaRepository<ModelType, ModelIdType> repository;
 
+    protected final JpaRepository<ModelType, ModelIdType> repository;
 
     public BaseCrudService(JpaRepository<ModelType, ModelIdType> repository) {
         this.repository = repository;
@@ -32,7 +29,10 @@ public abstract class BaseCrudService<ModelType, ModelIdType> {
         ).stream().toList();
     }
 
-    public ModelType insert(ModelType model) {
+    public ModelType insert(ModelType model) throws Exception {
+        var field = model.getClass().getDeclaredField("id");
+        field.setAccessible(true);
+        field.set(model, null);
         return repository.save(model);
     }
 
