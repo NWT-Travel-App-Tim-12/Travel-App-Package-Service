@@ -1,5 +1,6 @@
 package com.app.travel.util;
 
+import com.app.travel.util.exceptions.FieldNameBaseException;
 import com.app.travel.util.exceptions.InvalidAdditionalDataCast;
 import com.app.travel.util.exceptions.MissingParameterInRequest;
 import com.app.travel.util.exceptions.ObjectDoesNotExistInDb;
@@ -43,13 +44,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             ObjectDoesNotExistInDb.class,
             InvalidAdditionalDataCast.class
     })
-    public ResponseEntity<Object> customErrors(RuntimeException exception){
+    public ResponseEntity<Object> customErrors(FieldNameBaseException exception){
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("timestamp", new Date());
         responseBody.put("status", HttpStatus.BAD_REQUEST.value());
-        var list = new ArrayList<String>();
-        list.add(exception.getMessage());
-        responseBody.put("errors", list);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+        var errors = new HashMap<String, String>();
+        errors.put(exception.getFieldName(), exception.getMessage());
+        responseBody.put("errors", errors);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(responseBody);
     }
 }

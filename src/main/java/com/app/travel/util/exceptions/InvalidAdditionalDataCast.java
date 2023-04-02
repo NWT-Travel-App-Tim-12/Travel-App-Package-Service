@@ -1,7 +1,7 @@
 package com.app.travel.util.exceptions;
 
-public class InvalidAdditionalDataCast extends RuntimeException{
+public class InvalidAdditionalDataCast extends FieldNameBaseException{
     public InvalidAdditionalDataCast(String message) {
-        super(message);
+        super(message, "additional_data");
     }
 }

@@ -38,7 +38,7 @@ public class CurrencyController extends BaseController<Currency, Integer, Curren
     }
 
     @PatchMapping
-    public ResponseEntity<Currency> patch(Integer id, @RequestBody @Valid Currency request) throws Exception {
+    public ResponseEntity<Currency> patch(Integer id, @RequestBody Currency request) throws Exception {
         return super.patch(id, request);
     }
 

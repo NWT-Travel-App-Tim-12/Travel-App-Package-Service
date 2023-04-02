@@ -51,7 +51,7 @@ public class ServiceControler extends BaseController<Service, Integer, ServiceSe
     }
 
     @PatchMapping
-    public ResponseEntity<ServiceReturnDTO> patch(Integer id, @RequestBody @Valid ServiceInsertDTO request) throws Exception {
+    public ResponseEntity<ServiceReturnDTO> patch(Integer id, @RequestBody ServiceInsertDTO request) throws Exception {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(service.patch(id, request));

@@ -39,7 +39,7 @@ public class ServiceTypeController extends BaseController<ServiceType, Integer, 
     }
 
     @PatchMapping
-    public ResponseEntity<ServiceType> patch(Integer id, @RequestBody @Valid ServiceType request) throws Exception {
+    public ResponseEntity<ServiceType> patch(Integer id, @RequestBody ServiceType request) throws Exception {
         return super.patch(id, request);
     }
 

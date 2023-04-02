@@ -37,7 +37,7 @@ public class PackageController extends BaseController<Package, Integer, PackageS
     }
 
     @PatchMapping
-    public ResponseEntity<Package> patch(Integer id, @RequestBody @Valid Package request) throws Exception {
+    public ResponseEntity<Package> patch(Integer id, @RequestBody Package request) throws Exception {
         return super.patch(id, request);
     }
 

@@ -46,7 +46,7 @@ public class RegionController extends BaseController<Region, Integer, RegionServ
     }
 
     @PatchMapping
-    public ResponseEntity<Region> patch(Integer id, @RequestBody @Valid Region request) throws Exception {
+    public ResponseEntity<Region> patch(Integer id, @RequestBody Region request) throws Exception {
         return super.patch(id, request);
     }
 
