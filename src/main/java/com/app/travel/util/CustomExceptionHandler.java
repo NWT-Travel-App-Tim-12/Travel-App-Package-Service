@@ -52,7 +52,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         errors.put(exception.getFieldName(), exception.getMessage());
         responseBody.put("errors", errors);
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
+                .status(
+                        exception.getCode() != null ? exception.getCode() : HttpStatus.BAD_REQUEST
+                )
                 .body(responseBody);
     }
 }

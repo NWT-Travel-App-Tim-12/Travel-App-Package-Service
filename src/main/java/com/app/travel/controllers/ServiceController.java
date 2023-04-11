@@ -14,10 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "service")
-public class ServiceControler extends BaseController<Service, Integer, ServiceService>{
+public class ServiceController extends BaseController<Service, Integer, ServiceService>{
     private final ServiceService service;
     @Autowired
-    public ServiceControler(ServiceService service) {
+    public ServiceController(ServiceService service) {
         super(service);
         this.service = service;
     }
