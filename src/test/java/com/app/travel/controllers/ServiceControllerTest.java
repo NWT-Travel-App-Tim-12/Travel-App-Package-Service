@@ -1,9 +1,7 @@
 package com.app.travel.controllers;
 
 import com.app.travel.models.Service;
-import com.app.travel.models.additinaldata.ExcursionData;
 import com.app.travel.models.dto.ServiceInsertDTO;
-import com.app.travel.models.dto.ServiceReturnDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ServiceControllerTest {
