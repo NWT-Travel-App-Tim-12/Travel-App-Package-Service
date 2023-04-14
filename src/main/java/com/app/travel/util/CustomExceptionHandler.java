@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,14 +45,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     })
     public ResponseEntity<Object> customErrors(FieldNameBaseException exception){
         Map<String, Object> responseBody = new HashMap<>();
+        var statusCode = exception.getCode() != null ? exception.getCode() : HttpStatus.BAD_REQUEST;
         responseBody.put("timestamp", new Date());
-        responseBody.put("status", HttpStatus.BAD_REQUEST.value());
+        responseBody.put("status", statusCode.value());
         var errors = new HashMap<String, String>();
         errors.put(exception.getFieldName(), exception.getMessage());
         responseBody.put("errors", errors);
         return ResponseEntity
                 .status(
-                        exception.getCode() != null ? exception.getCode() : HttpStatus.BAD_REQUEST
+                        statusCode
                 )
                 .body(responseBody);
     }

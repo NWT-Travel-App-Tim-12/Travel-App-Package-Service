@@ -7,6 +7,8 @@ import com.app.travel.models.dto.ServiceInsertDTO;
 import com.app.travel.models.dto.ServiceReturnDTO;
 import com.app.travel.repositories.ServiceRepository;
 import com.app.travel.util.GenericCaster;
+import com.app.travel.util.exceptions.ObjectDoesNotExistInDb;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
@@ -23,7 +25,13 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
 
     public Service insert(ServiceInsertDTO model) {
 
-        if(userClient.getUser(model.getAgentRef())==null) return null; // handle as error
+        try{
+            var user = userClient.getUser(model.getAgentRef());
+        }catch (FeignException e){
+            if(e.status() == 500) throw e;
+            throw new ObjectDoesNotExistInDb("No data with id " + model.getAgentRef() + "!", "agentRef");
+
+        }
 
         AdditionalData data = GenericCaster.castToAppropriateType(model.getAdditionalData());
         var newService = new Service(
