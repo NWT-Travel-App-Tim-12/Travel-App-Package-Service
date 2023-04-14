@@ -30,7 +30,6 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
         }catch (FeignException e){
             if(e.status() == 500) throw e;
             throw new ObjectDoesNotExistInDb("No data with id " + model.getAgentRef() + "!", "agentRef");
-
         }
 
         AdditionalData data = GenericCaster.castToAppropriateType(model.getAdditionalData());
