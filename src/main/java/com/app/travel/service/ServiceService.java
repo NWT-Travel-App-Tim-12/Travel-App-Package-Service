@@ -1,11 +1,13 @@
 package com.app.travel.service;
 
+import com.app.travel.client.UserClient;
 import com.app.travel.models.Service;
 import com.app.travel.models.additinaldata.AdditionalData;
 import com.app.travel.models.dto.ServiceInsertDTO;
 import com.app.travel.models.dto.ServiceReturnDTO;
 import com.app.travel.repositories.ServiceRepository;
 import com.app.travel.util.GenericCaster;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +18,13 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
         super(repository);
     }
 
+    @Autowired
+    private UserClient userClient;
+
     public Service insert(ServiceInsertDTO model) {
+
+        if(userClient.getUser(model.getAgentRef())==null) return null; // handle as error
+
         AdditionalData data = GenericCaster.castToAppropriateType(model.getAdditionalData());
         var newService = new Service(
                 null,

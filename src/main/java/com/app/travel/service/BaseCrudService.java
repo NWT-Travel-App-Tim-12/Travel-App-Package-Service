@@ -1,8 +1,11 @@
 package com.app.travel.service;
 
+import com.app.travel.client.UserClient;
+import com.app.travel.client.UserClientModel;
 import com.app.travel.util.annotations.IgnoreOnObjectUpdate;
 import com.app.travel.util.exceptions.MissingParameterInRequest;
 import com.app.travel.util.exceptions.ObjectDoesNotExistInDb;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,6 +16,10 @@ import java.util.List;
 public abstract class BaseCrudService<ModelType, ModelIdType> {
 
     protected final JpaRepository<ModelType, ModelIdType> repository;
+
+
+    @Autowired
+    private UserClient userClient;
 
     private final Class<ModelType> modelClass;
 
@@ -34,6 +41,8 @@ public abstract class BaseCrudService<ModelType, ModelIdType> {
     }
 
     public ModelType insert(ModelType model) throws Exception {
+
+
         var field = modelClass.getDeclaredField("id");
         field.setAccessible(true);
         field.set(model, null);
