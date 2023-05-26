@@ -40,7 +40,7 @@ public class PackageServiceController {
                     service.getId(),
                     service.getServiceTypeId(),
                     service.getRegionId(),
-                    service.getAgentRef(),
+                    service.getAgentId(),
                     service.getServiceCode(),
                     service.getName(),
                     service.getDescription(),

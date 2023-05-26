@@ -50,7 +50,7 @@ public class Service {
     private Integer regionId;
     @Getter
     @Setter
-    private Integer agentRef;
+    private Integer agentId;
     @Getter
     @Setter
     private String serviceCode;

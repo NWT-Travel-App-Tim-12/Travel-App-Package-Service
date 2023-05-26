@@ -26,10 +26,10 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
     public Service insert(ServiceInsertDTO model) {
 
         try{
-            var user = userClient.getUser(model.getAgentRef());
+            var user = userClient.getUser(model.getAgentId());
         }catch (FeignException e){
             if(e.status() == 500) throw e;
-            throw new ObjectDoesNotExistInDb("No data with id " + model.getAgentRef() + "!", "agentRef");
+            throw new ObjectDoesNotExistInDb("No data with id " + model.getAgentId() + "!", "agentRef");
         }
 
         AdditionalData data = GenericCaster.castToAppropriateType(model.getAdditionalData());
@@ -39,7 +39,7 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                 model.getServiceTypeId(),
                 null,
                 model.getRegionId(),
-                model.getAgentRef(),
+                model.getAgentId(),
                 model.getServiceCode(),
                 model.getName(),
                 model.getDescription(),
@@ -63,7 +63,7 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                 service.getId(),
                 service.getServiceTypeId(),
                 service.getRegionId(),
-                service.getAgentRef(),
+                service.getAgentId(),
                 service.getServiceCode(),
                 service.getName(),
                 service.getDescription(),
@@ -87,7 +87,7 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                         model.getServiceTypeId(),
                         null,
                         model.getRegionId(),
-                        model.getAgentRef(),
+                        model.getAgentId(),
                         model.getServiceCode(),
                         model.getName(),
                         model.getDescription(),
@@ -107,7 +107,7 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                         model.getServiceTypeId(),
                         null,
                         model.getRegionId(),
-                        model.getAgentRef(),
+                        model.getAgentId(),
                         model.getServiceCode(),
                         model.getName(),
                         model.getDescription(),

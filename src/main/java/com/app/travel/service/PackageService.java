@@ -19,10 +19,10 @@ public class PackageService extends BaseCrudService<Package, Integer>{
     @Override
     public Package insert(Package model) throws Exception {
         try{
-            var user = userClient.getUser(model.getAgentRef());
+            var user = userClient.getUser(model.getAgentId());
         }catch (FeignException e){
             if(e.status() == 500) throw e;
-            throw new ObjectDoesNotExistInDb("No data with id " + model.getAgentRef() + "!", "agentRef");
+            throw new ObjectDoesNotExistInDb("No data with id " + model.getAgentId() + "!", "agentRef");
         }
 
         return super.insert(model);

@@ -24,7 +24,7 @@ public class ServiceInsertDTO {
     @Getter
     @Setter
     //@NotNull(message = "The service must have a defined agent reference")
-    private Integer agentRef;
+    private Integer agentId;
     @Getter
     @Setter
     private String serviceCode;
