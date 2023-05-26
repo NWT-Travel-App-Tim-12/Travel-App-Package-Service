@@ -42,11 +42,11 @@ public class Package {
     @Getter
     @Setter
     @NotNull(message = "The package must have a defined agent reference!")
-    private Integer agentRef;
+    private Integer agentId;
     @Getter
     @Setter
     @NotNull(message = "The package must have a defined agency!")
-    private UUID agency;
+    private UUID agencyUuid;
     @Getter
     @Setter
     @Column(name = "package_code")

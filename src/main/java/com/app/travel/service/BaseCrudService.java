@@ -1,7 +1,6 @@
 package com.app.travel.service;
 
 import com.app.travel.client.UserClient;
-import com.app.travel.client.UserClientModel;
 import com.app.travel.util.annotations.IgnoreOnObjectUpdate;
 import com.app.travel.util.exceptions.MissingParameterInRequest;
 import com.app.travel.util.exceptions.ObjectDoesNotExistInDb;
