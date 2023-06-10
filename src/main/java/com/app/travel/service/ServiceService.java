@@ -46,7 +46,8 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                 LocalDate.now(),
                 model.getCost(),
                 null,
-                data.toJson()
+                data.toJson(),
+                model.getImageUrl()
         );
         repository.save(newService);
 
@@ -69,7 +70,8 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                 service.getDescription(),
                 service.getCreatedAt(),
                 service.getCost(),
-                additionalData
+                additionalData,
+                service.getImageUrl()
         );
     }
 
@@ -94,7 +96,8 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                         LocalDate.now(),
                         model.getCost(),
                         null,
-                        data.toJson()
+                        data.toJson(),
+                        model.getImageUrl()
                 )));
     }
 
@@ -114,7 +117,8 @@ public class ServiceService extends BaseCrudService<Service, Integer> {
                         LocalDate.now(),
                         model.getCost(),
                         null,
-                        data == null ? null : data.toJson()
+                        data == null ? null : data.toJson(),
+                        model.getImageUrl()
                 )));
     }
 }

@@ -1,16 +1,14 @@
 package com.app.travel.models.dto;
 
 import jakarta.validation.constraints.PositiveOrZero;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Map;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class ServiceInsertDTO {
     @Getter
     @Setter
@@ -45,4 +43,6 @@ public class ServiceInsertDTO {
     @Getter
     @Setter
     private Map<String, Object> additionalData;
+
+    private String imageUrl;
 }

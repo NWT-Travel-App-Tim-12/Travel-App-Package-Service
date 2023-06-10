@@ -1,15 +1,13 @@
 package com.app.travel.models.dto;
 
 import com.app.travel.models.additinaldata.AdditionalData;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class ServiceReturnDTO {
 
     @Getter
@@ -42,4 +40,7 @@ public class ServiceReturnDTO {
     @Getter
     @Setter
     private AdditionalData additionalData;
+
+    private String imageUrl;
+
 }

@@ -46,7 +46,8 @@ public class PackageServiceController {
                     service.getDescription(),
                     service.getCreatedAt(),
                     service.getCost(),
-                    additionalData
+                    additionalData,
+                    service.getImageUrl()
             );
         }).toList());
     }
