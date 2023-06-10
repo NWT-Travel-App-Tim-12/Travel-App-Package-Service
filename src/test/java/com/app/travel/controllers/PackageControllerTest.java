@@ -62,7 +62,8 @@ class PackageControllerTest {
                 LocalDate.now().plusDays(100),
                 LocalDate.now().plusDays(10),
                 LocalDate.now(),
-                null
+                null,
+                ""
         );
 
         final ResponseEntity<Package> response = template.postForEntity(
@@ -92,7 +93,8 @@ class PackageControllerTest {
                 LocalDate.MAX,
                 LocalDate.MIN,
                 LocalDate.now(),
-                null
+                null,
+                ""
         );
 
         final String url = String.format(baseUrl, port) + "?id=5";

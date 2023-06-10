@@ -53,7 +53,8 @@ class ServiceControllerTest {
                 "desc",
                 LocalDate.now(),
                 225.,
-                map
+                map,
+                ""
         );
 
         final ResponseEntity<Service> response = template.postForEntity(
@@ -84,7 +85,8 @@ class ServiceControllerTest {
                 LocalDate.now(),
                 225.,
                 null,
-                "{\"tour_guide_name\": \"meho\"}"
+                "{\"tour_guide_name\": \"meho\"}",
+                ""
         );
 
         final String url = String.format(baseUrl, port) + "?id=5";
