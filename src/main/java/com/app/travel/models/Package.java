@@ -28,7 +28,7 @@ public class Package {
     private Integer id;
     @Getter
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "region_id", insertable = false, updatable = false)
     @IgnoreOnObjectUpdate
     @JsonIgnore
@@ -70,7 +70,7 @@ public class Package {
     private LocalDate createdAt;
     @Getter
     @Setter
-    @ManyToMany(mappedBy = "packages", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "packages", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JsonIgnore
     @IgnoreOnObjectUpdate
     private List<Service> services;

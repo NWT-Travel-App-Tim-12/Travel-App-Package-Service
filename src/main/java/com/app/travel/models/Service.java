@@ -26,7 +26,7 @@ public class Service {
     private Integer id;
     @Getter
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "service_type_id", insertable = false, updatable = false)
     @IgnoreOnObjectUpdate
     @JsonIgnore
@@ -37,7 +37,7 @@ public class Service {
     private Integer serviceTypeId;
     @Getter
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "region_id", insertable = false, updatable = false)
     @IgnoreOnObjectUpdate
     @JsonBackReference
@@ -68,7 +68,7 @@ public class Service {
     private Double cost;
     @Getter
     @Setter
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "package_services",
             joinColumns = {@JoinColumn(name = "service_id")},
